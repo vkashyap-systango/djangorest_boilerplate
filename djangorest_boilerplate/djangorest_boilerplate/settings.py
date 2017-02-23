@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'django.contrib.admindocs',
+    'users',
 ]
 
 REST_FRAMEWORK = {
@@ -103,7 +104,7 @@ SITE_ID = 2
 
 WSGI_APPLICATION = 'djangorest_boilerplate.wsgi.application'
 
-
+AUTH_USER_MODEL = 'users.BaseUser'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -161,6 +162,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERSION': 'v2.8',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
