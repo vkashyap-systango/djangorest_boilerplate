@@ -1,3 +1,4 @@
 *.pyc
 venv/
 djangorest_boilerplate/static/
+boilerplateenv/
