@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load socialaccount %}
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -16,14 +17,14 @@
 </head>
 
 <body>
-  
+  {% providers_media_js %}  
   <div class="login-box">
     <div class="lb-header">
       <a href="#" class="active" id="login-box-link">Login</a>
       <a href="#" id="signup-box-link">Sign Up</a>
     </div>
     <div class="social-login">
-      <a href="{% provider_login_url "facebook" method="oauth2" %}">
+      <a href="{% provider_login_url "facebook" method="js_sdk" %}">
         <i class="fa fa-facebook fa-lg"></i>
         Login in with facebook
       </a>

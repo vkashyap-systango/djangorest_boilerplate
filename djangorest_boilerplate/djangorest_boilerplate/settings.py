@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for djangorest_boilerplate project.
 
@@ -70,10 +71,10 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-LOGIN_REDIRECT_URL = 'boilerplate/login/'
+LOGIN_REDIRECT_URL = '/api/users/fb_login_success/'
 SOCIALACCOUNT_QUERY_EMAIL = True
     
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'djangorest_boilerplate.urls'
 
 TEMPLATES = [
@@ -140,7 +141,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
-        'METHOD': 'oauth2',
+        'METHOD': 'js_sdk',
         'SCOPE': ['email', 'public_profile', 'user_friends'],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
         'FIELDS': [
@@ -157,9 +158,9 @@ SOCIALACCOUNT_PROVIDERS = {
             'updated_time',
         ],
         'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': 'path.to.callable',
+        'LOCALE_FUNC':lambda request:'en_US',
         'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.8',
+        'VERSION': 'v2.4',
     }
 }
 
