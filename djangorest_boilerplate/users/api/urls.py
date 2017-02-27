@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     url(r'^users/login/$', views.IndexPageView.as_view()),
-    url(r'^users/fb_login_success/$', views.FBLoginView.as_view()),
+    url(r'^users/fb_login_success/$', views.SocialLoginView.as_view()),
 ]

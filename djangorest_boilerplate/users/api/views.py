@@ -16,7 +16,14 @@ class IndexPageView(APIView):
         return Response()
 
 
-class FBLoginView(APIView):
+class SocialLoginView(APIView):
     def get(self, request):
-        import pdb; pdb.set_trace()
-        return Response()
+        from allauth.socialaccount.models import SocialToken
+        user = request.user
+        token = SocialToken.objects.filter(account__user=user, account__provider='facebook')
+        if not token:
+            token = SocialToken.objects.filter(account__user=user, account__provider='google')
+        success = False
+        if token:
+            success = True
+        return Response({'success':success})
