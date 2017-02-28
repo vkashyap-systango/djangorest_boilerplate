@@ -87,7 +87,7 @@ class ResetPassword(APIView):
         if serializer.is_valid():
             user = serializer.object.get('user')
             token = default_token_generator.make_token(user)
-            send_password_reset_email('http://localhost:8000/api/users/password/reset/confirm/'+token+'/', [user.email,])
+            send_password_reset_email.delay('http://localhost:8000/api/users/password/reset/confirm/'+token+'/', [user.email,])
             return Response({"success":"true"})
         return Response({"success":"false","reset_token":token})
 

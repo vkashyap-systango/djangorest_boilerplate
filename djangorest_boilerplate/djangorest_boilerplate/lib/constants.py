@@ -1,1 +1,1 @@
-SENDER_EMAIL = 'tusystango@yopmail.com'
+SENDER_EMAIL = 'srinivaskaly@gmail.com'
