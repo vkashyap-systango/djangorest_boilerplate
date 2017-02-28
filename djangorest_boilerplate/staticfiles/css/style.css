@@ -1,11 +1,11 @@
-body{
+ body{
   background-color: #1cbb9b;
-}
+} 
 .login-box{
   position:relative;
   margin: 10px auto;
   width: 500px;
-  height: 380px;
+  height: 500px;
   background-color: #fff;
   padding: 10px;
   border-radius: 3px;
@@ -84,7 +84,8 @@ box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
   margin-bottom: 10px;
 }
 .u-form-group input[type="email"],
-.u-form-group input[type="password"]{
+.u-form-group input[type="password"],
+.u-form-group input[type="text"]{
   width: calc(50% - 22px);
   height:45px;
   outline: none;

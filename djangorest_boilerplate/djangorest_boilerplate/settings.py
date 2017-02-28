@@ -49,11 +49,16 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django.contrib.admindocs',
     'users',
+    'djcelery',
+    'kombu.transport.django',
 ]
+
+import djcelery
+djcelery.setup_loader()
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [],
-    'PAGE_SIZE': 2000,
+    'PAGE_SIZE': 15,
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
 }
 
@@ -71,11 +76,14 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-LOGIN_REDIRECT_URL = '/api/users/fb_login_success/'
+LOGIN_REDIRECT_URL = '/api/users/user_details/'
 SOCIALACCOUNT_QUERY_EMAIL = True
     
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'djangorest_boilerplate.urls'
+
+# Celery related setting
+BROKER_URL = 'django://'
 
 TEMPLATES = [
     {
@@ -106,6 +114,9 @@ SITE_ID = 2
 WSGI_APPLICATION = 'djangorest_boilerplate.wsgi.application'
 
 AUTH_USER_MODEL = 'users.BaseUser'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_EMAIL_FIELD= 'email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -197,3 +208,9 @@ STATIC_ROOT= os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'srinivaskaly'
+EMAIL_HOST_PASSWORD = '#zX5cQw9@'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
