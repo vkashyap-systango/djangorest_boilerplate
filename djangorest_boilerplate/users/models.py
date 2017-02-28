@@ -19,13 +19,13 @@ class TimeStampModel(models.Model):
 
 class CustomUserManager(BaseUserManager):
 
-    def _create_user(self, mobile_number, password, is_staff, is_superuser, **extra_fields):
+    def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
         is_active = extra_fields.pop("is_active", False)
         now = timezone.now()
-        if not mobile_number:
-            raise ValueError('The given mobile_number must be set')
-        mobile_number = self.normalize_email(mobile_number)
-        user = self.model(mobile_number=mobile_number,
+        if not email:
+            raise ValueError('Email must be provided')
+        email = self.normalize_email(email)
+        user = self.model(email=email,
                           is_staff=is_staff, is_active=is_active,
                           is_superuser=is_superuser, last_login=now,
                           date_joined=now, **extra_fields)
@@ -33,13 +33,13 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, mobile_number, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         extra_fields.update({'is_active': True})
-        return self._create_user(mobile_number, password, False, False, **extra_fields)
+        return self._create_user(email, password, False, False, **extra_fields)
 
-    def create_superuser(self, mobile_number, password, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.update({'is_active': True})
-        return self._create_user(mobile_number, password, True, True, **extra_fields)
+        return self._create_user(email, password, True, True, **extra_fields)
 
 
 class BaseUser(AbstractBaseUser, PermissionsMixin):
@@ -52,10 +52,9 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    mobile_number = models.CharField(max_length=15, unique=True)
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'mobile_number'
+    USERNAME_FIELD = 'email'
 
     def get_short_name(self):
         return self.full_name
